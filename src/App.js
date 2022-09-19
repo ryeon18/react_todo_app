@@ -1,25 +1,48 @@
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends Component {
+    btnStyle = {
+        color: '#fff',
+        border: 'none',
+        padding: '5px 9px',
+        borderRadius: '50%',
+        cursor: 'pointer',
+        float: 'right',
+    };
 
-export default App;
+    getStyle = () => {
+        return {
+            padding: '10px',
+            borderBottom: '1px #ccc dotted',
+            TextDecoration: 'none',
+        };
+    };
+
+    todoData = [
+        {id: '1', title: '공부하기', comleted: true},
+        {id: '2', title: '청소하기', comleted: false},
+    ];
+    render() {
+        return (
+            <div className="container">
+                <div className="todoBlock">
+                    <div className="title">
+                        <h1>할 일 목록</h1>
+                    </div>
+
+                    {this.todoData.map(data => {
+                        const {id, title, completed} = data;
+                        return (
+                            <div style={this.getStyle()} key={id}>
+                                <input type="checkbox" defalutChecked={completed} />
+                                {title}
+                                <button style={this.btnStyle}>x</button>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
+}
