@@ -10,3 +10,32 @@
     border-radius: 10px;
     box-shadow: -9px 17px 13px rgb(0 0 0 / 16%);
 }
+
+.pop-up {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    border: 1px solid aqua;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.pop-up p {
+    text-align: center;
+}
+
+.button-box {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+}
+
+.buttonBox span {
+    margin: 10px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.none {
+    display: none;
+}
