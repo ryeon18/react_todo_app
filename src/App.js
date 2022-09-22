@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
+import './App.scss';
 
 const todoData = [
     {id: '1', title: '공부하기', comleted: true},
@@ -34,7 +34,8 @@ const App = () => {
     // 쿠키만료일 설정
     const setCookie = (name, value, expireDays) => {
         let date = new Date();
-        date.setDate(date.getDate() + expireDays);
+        date.setDate(date.getDate() + expireDays); // 일자
+        // date.setMinutes(date.getMinutes() + expireDays); //분 설정
 
         document.cookie =
             decodeURIComponent(name) + '=' + decodeURIComponent(value) + '; path=/; expires=' + date.toUTCString();
@@ -58,7 +59,7 @@ const App = () => {
                 })}
             </div>
 
-            <div className={isPopup === 'true' ? 'pop-up' : 'none'}>
+            <div className={isPopup === 'true' ? 'pop-up' : 'popup-none'}>
                 <p>팝업</p>
                 <div className="button-box">
                     <button onClick={() => todayClose('popup', 'false', 1)}>오늘 그만보기</button>

@@ -15,9 +15,12 @@
     position: fixed;
     top: 25%;
     left: 50%;
-    border: 1px solid aqua;
-    background-color: #fff;
+    min-width: 150px;
     padding: 10px;
+    border: 1px solid cadetblue;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    color: darkgreen;
 }
 
 .pop-up p {
@@ -27,15 +30,16 @@
 .button-box {
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
+    color: cadetblue;
+
+    button {
+        border: 1px solid cadetblue;
+        border-radius: 10px;
+        font-size: 10px;
+        color: cadetblue;
+    }
 }
 
-.buttonBox span {
-    margin: 10px;
-    border: 1px solid black;
-    padding: 5px;
-}
-
-.none {
+.popup-none {
     display: none;
 }
