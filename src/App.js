@@ -7,15 +7,38 @@ const todoData = [
 ];
 
 const App = () => {
-    const [isPopup, setIsPopup] = useState(true);
+    const [isPopup, setIsPopup] = useState('');
 
-    useEffect(() => {});
-
+    // 쿠키존재확인 후 없으면 쿠키생성
+    useEffect(() => {
+        const popUpStatus = document.cookie.split('popup=')[1]?.split(' ')[0].replace(';', '');
+        if (popUpStatus === undefined) {
+            document.cookie = `popup=true; path=/`;
+        } else if (popUpStatus === 'true') {
+            setIsPopup('true');
+        } else if (popUpStatus === 'false') {
+            setIsPopup('false');
+        }
+    }, []);
+    // 팝업 닫기
     const close = () => {
-        setIsPopup(!isPopup);
+        setIsPopup(false);
     };
 
-    const todayClose = () => {};
+    // 팝업 오늘만 보기
+    const todayClose = (name, value, expireDays) => {
+        setIsPopup(false);
+        setCookie(name, value, expireDays);
+    };
+
+    // 쿠키만료일 설정
+    const setCookie = (name, value, expireDays) => {
+        let date = new Date();
+        date.setDate(date.getDate() + expireDays);
+
+        document.cookie =
+            decodeURIComponent(name) + '=' + decodeURIComponent(value) + '; path=/; expires=' + date.toUTCString();
+    };
 
     return (
         <div>
@@ -34,10 +57,11 @@ const App = () => {
                     );
                 })}
             </div>
-            <div className={isPopup ? 'pop-up' : 'none'}>
+
+            <div className={isPopup === 'true' ? 'pop-up' : 'none'}>
                 <p>팝업</p>
                 <div className="button-box">
-                    <button onClick={() => todayClose()}>오늘 그만보기</button>
+                    <button onClick={() => todayClose('popup', 'false', 1)}>오늘 그만보기</button>
                     <button onClick={() => close()}>닫기</button>
                 </div>
             </div>
@@ -46,6 +70,7 @@ const App = () => {
 };
 
 export default App;
+
 // export default class App extends Component {
 //     btnStyle = {
 //         color: '#fff',
