@@ -3,12 +3,40 @@
     max-width: 600px;
 }
 
-.todoBlock {
+.todo-block {
     padding: 30px;
     margin-top: 50px;
     background: #fff;
     border-radius: 10px;
     box-shadow: -9px 17px 13px rgb(0 0 0 / 16%);
+}
+
+.todo-list {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.btn-style {
+    color: #fff;
+    border: none;
+    padding: 5px 9px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.add-list {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.list-title {
+    flex: 10;
+    padding: 5px;
+}
+
+.submit-btn {
+    flex: 1;
 }
 
 .pop-up {
@@ -21,10 +49,9 @@
     border-radius: 20px;
     background-color: whitesmoke;
     color: darkgreen;
-}
-
-.pop-up p {
-    text-align: center;
+    p {
+        text-align: center;
+    }
 }
 
 .button-box {

@@ -7,7 +7,9 @@ const todoData = [
 ];
 
 const App = () => {
-    const [isPopup, setIsPopup] = useState('');
+    const [isPopup, setIsPopup] = useState(''); // 팝업창
+    const [todoList, setTodoList] = useState(todoData); // 할일목록
+    const [addTitle, setTitle] = useState(''); // 할일 제목
 
     // 쿠키존재확인 후 없으면 쿠키생성
     useEffect(() => {
@@ -20,6 +22,7 @@ const App = () => {
             setIsPopup('false');
         }
     }, []);
+
     // 팝업 닫기
     const close = () => {
         setIsPopup(false);
@@ -41,19 +44,57 @@ const App = () => {
             decodeURIComponent(name) + '=' + decodeURIComponent(value) + '; path=/; expires=' + date.toUTCString();
     };
 
+    // 리스트 지우기
+    const removeList = id => {
+        let newTodoData = todoList.filter(data => data.id !== id);
+        setTodoList(newTodoData);
+    };
+
+    //  할일 리스트 제목
+    const handleTitle = e => {
+        setTitle(e.target.value);
+    };
+
+    // 할일 리스트 추가
+    const handleSubmit = e => {
+        e.preventDefault();
+        let newTodo = {
+            id: Date.now(),
+            title: addTitle,
+            comleted: false,
+        };
+        setTodoList([...todoList, newTodo]);
+        setTitle('');
+    };
+
     return (
         <div>
-            <div className="todoBlock">
+            <div className="todo-block">
                 <div className="title">
                     <h1>할 일 목록</h1>
                 </div>
-                {todoData.map(data => {
+                <form className="add-list" onSubmit={e => handleSubmit(e)}>
+                    <input
+                        type="text"
+                        name="value"
+                        placeholder="해야 할 일을 입력하세요."
+                        value={addTitle}
+                        className="list-title"
+                        onChange={e => handleTitle(e)}
+                    />
+                    <input type="submit" value="입력" className="submit-btn" />
+                </form>
+                {todoList?.map(data => {
                     const {id, title, completed} = data;
                     return (
-                        <div key={id}>
-                            <input type="checkbox" defalutchecked={completed} />
-                            {title}
-                            <button>x</button>
+                        <div key={id} className="todo-list">
+                            <div>
+                                <input type="checkbox" defalutchecked={completed} />
+                                <span>{title}</span>
+                            </div>
+                            <button className="btn-style" onClick={() => removeList(id)}>
+                                x
+                            </button>
                         </div>
                     );
                 })}
@@ -71,48 +112,3 @@ const App = () => {
 };
 
 export default App;
-
-// export default class App extends Component {
-//     btnStyle = {
-//         color: '#fff',
-//         border: 'none',
-//         padding: '5px 9px',
-//         borderRadius: '50%',
-//         cursor: 'pointer',
-//         float: 'right',
-//     };
-
-//     getStyle = () => {
-//         return {
-//             padding: '10px',
-//             borderBottom: '1px #ccc dotted',
-//             TextDecoration: 'none',
-//         };
-//     };
-
-//     todoData = [
-//         {id: '1', title: '공부하기', comleted: true},
-//         {id: '2', title: '청소하기', comleted: false},
-//     ];
-//     render() {
-//         return (
-//             <div className="container">
-//                 <div className="todoBlock">
-//                     <div className="title">
-//                         <h1>할 일 목록</h1>
-//                     </div>
-//                     {this.todoData.map(data => {
-//                         const {id, title, completed} = data;
-//                         return (
-//                             <div style={this.getStyle()} key={id}>
-//                                 <input type="checkbox" defalutChecked={completed} />
-//                                 {title}
-//                                 <button style={this.btnStyle}>x</button>
-//                             </div>
-//                         );
-//                     })}
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
