@@ -5,15 +5,16 @@
 
 .todo-block {
     padding: 30px;
-    margin-top: 50px;
+    margin: 50px auto 0;
     background: #fff;
     border-radius: 10px;
     box-shadow: -9px 17px 13px rgb(0 0 0 / 16%);
+    min-width: 250px;
+    max-width: 500px;
 }
 
 .todo-list {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 5px;
 }
 
@@ -33,6 +34,19 @@
 .list-title {
     flex: 10;
     padding: 5px;
+}
+
+.list-style {
+    width: 100%;
+    border-bottom: 1px #ccc dotted;
+}
+
+.list-title {
+    padding: 10px;
+}
+
+.done-todo {
+    text-decoration: line-through;
 }
 
 .submit-btn {

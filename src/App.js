@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './App.scss';
 
 const todoData = [
-    {id: '1', title: '공부하기', comleted: true},
-    {id: '2', title: '청소하기', comleted: false},
+    // {id: '1', title: '공부하기', completed: true},
+    // {id: '2', title: '청소하기', completed: false},
 ];
 
 const App = () => {
@@ -22,6 +22,10 @@ const App = () => {
             setIsPopup('false');
         }
     }, []);
+
+    // useEffect(() => {
+    //     setTodoList();
+    // }, [todoList]);
 
     // 팝업 닫기
     const close = () => {
@@ -58,13 +62,28 @@ const App = () => {
     // 할일 리스트 추가
     const handleSubmit = e => {
         e.preventDefault();
-        let newTodo = {
-            id: Date.now(),
-            title: addTitle,
-            comleted: false,
-        };
-        setTodoList([...todoList, newTodo]);
-        setTitle('');
+        if (addTitle.length <= 0) {
+            return alert('해야 할 일을 입력해 주세요');
+        } else {
+            let newTodo = {
+                id: Date.now(),
+                title: addTitle,
+                completed: false,
+            };
+            setTodoList(prev => [...prev, newTodo]);
+            setTitle('');
+        }
+    };
+
+    const handleCompleteChange = id => {
+        let newTodoList = todoList.map(data => {
+            if (data.id === id) {
+                data.completed = !data.completed;
+            }
+            return data;
+        });
+
+        setTodoList(newTodoList);
     };
 
     return (
@@ -88,9 +107,15 @@ const App = () => {
                     const {id, title, completed} = data;
                     return (
                         <div key={id} className="todo-list">
-                            <div>
-                                <input type="checkbox" defalutchecked={completed} />
-                                <span>{title}</span>
+                            <div className="list-style">
+                                <input
+                                    type="checkbox"
+                                    defaultchecked={completed}
+                                    onChange={() => handleCompleteChange(id)}
+                                />
+                                <span className={completed === true ? 'list-title done-todo' : 'list-title'}>
+                                    {title}
+                                </span>
                             </div>
                             <button className="btn-style" onClick={() => removeList(id)}>
                                 x
