@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import './App.scss';
-
-const todoData = [
-    // {id: '1', title: '공부하기', completed: true},
-    // {id: '2', title: '청소하기', completed: false},
-];
+// import './App.scss';
+import List from './components/List';
+import Form from './components/Form';
+import Popup from './components/Popup';
 
 const App = () => {
     const [isPopup, setIsPopup] = useState(''); // 팝업창
-    const [todoList, setTodoList] = useState(todoData); // 할일목록
+    const [todoList, setTodoList] = useState([]); // 할일목록
     const [addTitle, setTitle] = useState(''); // 할일 제목
 
     // 쿠키존재확인 후 없으면 쿠키생성
@@ -22,10 +20,6 @@ const App = () => {
             setIsPopup('false');
         }
     }, []);
-
-    // useEffect(() => {
-    //     setTodoList();
-    // }, [todoList]);
 
     // 팝업 닫기
     const close = () => {
@@ -87,52 +81,22 @@ const App = () => {
     };
 
     return (
-        <div>
-            <div className="todo-block">
-                <div className="title">
-                    <h1>할 일 목록</h1>
-                </div>
-                <form className="add-list" onSubmit={e => handleSubmit(e)}>
-                    <input
-                        type="text"
-                        name="value"
-                        placeholder="해야 할 일을 입력하세요."
-                        value={addTitle}
-                        className="list-title"
-                        onChange={e => handleTitle(e)}
-                    />
-                    <input type="submit" value="입력" className="submit-btn" />
-                </form>
-                {todoList?.map(data => {
-                    const {id, title, completed} = data;
-                    return (
-                        <div key={id} className="todo-list">
-                            <div className="list-style">
-                                <input
-                                    type="checkbox"
-                                    defaultchecked={completed}
-                                    onChange={() => handleCompleteChange(id)}
-                                />
-                                <span className={completed === true ? 'list-title done-todo' : 'list-title'}>
-                                    {title}
-                                </span>
+        <>
+            <div className="h-screen w-screen flex flex-col items-center">
+                <div className="flex flex-col justify-between items-center w-full max-w-[500px] min-w-[320px] mx-auto">
+                    <div className="w-full p-5 bg-white rounded text-center">
+                        <div>
+                            <div className="pb-5">
+                                <h1 className="text-3xl text-red-600 font-bold drop-shadow-lg">CHECK LIST</h1>
                             </div>
-                            <button className="btn-style" onClick={() => removeList(id)}>
-                                x
-                            </button>
+                            <Form handleSubmit={handleSubmit} addTitle={addTitle} handleTitle={handleTitle} />
                         </div>
-                    );
-                })}
-            </div>
-
-            <div className={isPopup === 'true' ? 'pop-up' : 'popup-none'}>
-                <p>팝업</p>
-                <div className="button-box">
-                    <button onClick={() => todayClose('popup', 'false', 1)}>오늘 그만보기</button>
-                    <button onClick={() => close()}>닫기</button>
+                    </div>
                 </div>
+                <List todoList={todoList} handleCompleteChange={handleCompleteChange} removeList={removeList} />
             </div>
-        </div>
+            {isPopup && <Popup isPopup={isPopup} todayClose={todayClose} close={close} />}
+        </>
     );
 };
 
