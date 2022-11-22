@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import './App.scss';
+import './App.scss';
 import List from './components/List';
 import Form from './components/Form';
 import Popup from './components/Popup';
@@ -107,7 +107,7 @@ const App = () => {
 
     return (
         <>
-            <div className="h-screen w-screen flex flex-col items-center">
+            <section className="h-[500px] w-screen flex flex-col items-center">
                 <div className="flex flex-col justify-between items-center w-full max-w-[500px] min-w-[320px] mx-auto">
                     <div className="w-full p-5 bg-white rounded text-center">
                         <div>
@@ -127,8 +127,14 @@ const App = () => {
                     handleCompleteChange={handleCompleteChange}
                     removeList={removeList}
                 />
-            </div>
+            </section>
             {isPopup && <Popup isPopup={isPopup} todayClose={todayClose} close={close} />}
+            <section>
+                <article className="anima">
+                    <h1>애니메이션</h1>
+                    <p>효과주기~</p>
+                </article>
+            </section>
         </>
     );
 };

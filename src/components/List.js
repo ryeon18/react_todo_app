@@ -20,7 +20,7 @@ const List = ({todoList, setTodoList, handleCompleteChange, removeList}) => {
     };
 
     return (
-        <div className="h-[calc(100vh-250px)] w-full max-w-[500px] p-5 overflow-y-scroll">
+        <div className="max-h-[250px] w-full max-w-[500px] p-5 overflow-y-scroll">
             <DragDropContext onDragEnd={HandleEnd}>
                 <Droppable droppableId="todo">
                     {provided => (
@@ -36,7 +36,7 @@ const List = ({todoList, setTodoList, handleCompleteChange, removeList}) => {
                                                     {...provided.dragHandleProps}
                                                     className={`${
                                                         snapshot.isDragging ? 'bg-gray-400' : 'bg-gray-100'
-                                                    } flex justify-center items-center pb-2`}
+                                                    } flex justify-center items-center pb-2 mb-3`}
                                                 >
                                                     <div className="w-full">
                                                         <input
