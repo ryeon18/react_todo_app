@@ -80,6 +80,31 @@ const App = () => {
         setTodoList(newTodoList);
     };
 
+    useEffect(() => {
+        if (window.Kakao) {
+            const kakao = window.Kakao;
+            if (!kakao.isInitialized()) {
+                kakao.init(process.env.REACT_APP_KAKAO_KEY);
+            }
+        }
+    }, []);
+
+    const kakaoSharedEvent = () => {
+        const {Kakao} = window;
+        Kakao.Share.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: `공유하기 테스트`,
+                description: `공유하기 description`,
+                imageUrl: '/',
+                imageWidth: 80,
+                link: {mobileWebUrl: '/', webUrl: '/'},
+            },
+            buttons: [{title: '웹으로 보기', link: {mobileWebUrl: '/', webUrl: '/'}}],
+            installTalk: true,
+        });
+    };
+
     return (
         <>
             <div className="h-screen w-screen flex flex-col items-center">
@@ -89,11 +114,19 @@ const App = () => {
                             <div className="pb-5">
                                 <h1 className="text-3xl text-red-600 font-bold drop-shadow-lg">CHECK LIST</h1>
                             </div>
+                            <button id="kakao-shared-btn" onClick={() => kakaoSharedEvent()}>
+                                카카오톡 공유
+                            </button>
                             <Form handleSubmit={handleSubmit} addTitle={addTitle} handleTitle={handleTitle} />
                         </div>
                     </div>
                 </div>
-                <List todoList={todoList} handleCompleteChange={handleCompleteChange} removeList={removeList} />
+                <List
+                    todoList={todoList}
+                    setTodoList={setTodoList}
+                    handleCompleteChange={handleCompleteChange}
+                    removeList={removeList}
+                />
             </div>
             {isPopup && <Popup isPopup={isPopup} todayClose={todayClose} close={close} />}
         </>
