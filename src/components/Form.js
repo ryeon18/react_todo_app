@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Form = ({handleSubmit, addTitle, handleTitle}) => {
+    console.log('form render');
     return (
         <form className="flex h-fit w-full p-2 " onSubmit={e => handleSubmit(e)}>
             <input
