@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Main from './Main';
-import ThreeTest from './ThreeTest.js';
+import Main from './pages/Main';
+import ThreeTest from './pages/ThreeTest.js';
 
 const Switchs = () => {
   return (

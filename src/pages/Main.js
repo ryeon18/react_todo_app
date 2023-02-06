@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-import Lists from './components/Lists';
-import Form from './components/Form';
-import Popup from './components/Popup';
+import Lists from '../components/Lists';
+import Form from '../components/Form';
+import Popup from '../components/Popup';
 
 const Main = () => {
   const [isPopup, setIsPopup] = useState(true); // 팝업창
