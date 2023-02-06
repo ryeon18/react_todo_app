@@ -52,6 +52,7 @@
 
 .three-test {
   background-color: black;
+  cursor: pointer;
 }
 .three-test canvas {
   width: 100%;
