@@ -37,9 +37,14 @@
 
 .three-test {
   background-color: black;
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
   cursor: pointer;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.rotate-test {
+  background-color: cornflowerblue;
 }

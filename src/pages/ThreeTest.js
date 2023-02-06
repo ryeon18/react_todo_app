@@ -6,8 +6,8 @@ import {useNavigate} from 'react-router-dom';
 const ThreeTest = () => {
   const navigation = useNavigate();
   const goToLink = e => {
-    // e.preventDefault();
-    // navigation('/rotate');
+    e.preventDefault();
+    navigation('/rotate');
   };
 
   return (
@@ -18,7 +18,7 @@ const ThreeTest = () => {
         <mesh>
           <ambientLight intensity={1} />
           <directionalLight position={[-1, 0, 1]} intensity={0.5} />
-          <boxGeometry className="box" args={[1, 1, 1]} />
+          <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial attach="material" color={'hotpink'} />
         </mesh>
       </Canvas>
