@@ -1,0 +1,51 @@
+.button-box {
+  display: flex;
+  justify-content: space-between;
+  color: cadetblue;
+}
+.button-box button {
+  border: 1px solid cadetblue;
+  border-radius: 10px;
+  font-size: 10px;
+  color: cadetblue;
+}
+
+.anima {
+  -webkit-animation: myAnimation 2s ease-in Alternate;
+          animation: myAnimation 2s ease-in Alternate;
+}
+
+@-webkit-keyframes myAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    background-color: black;
+  }
+}
+
+@keyframes myAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    background-color: black;
+  }
+}
+.list li {
+  border: 1px solid black;
+}
+
+.list li:nth-child(3n+1) {
+  width: 40px;
+}
+
+.list li:nth-child(3n+2) {
+  width: 80px;
+}
+
+.list li:nth-child(3n+3) {
+  width: 120px;
+}/*# sourceMappingURL=App.min.css.map */
